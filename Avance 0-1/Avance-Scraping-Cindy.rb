@@ -24,21 +24,30 @@ print('---PREGUNTA 2 y 3 descomentar codigo---')
 #-----------Para pregunta  2 y 3--------------------
 # Pregunta 2, necesito extraer año de la fecha y dos etiquetas
 # Pregunta 3, reutilizo lo dee extraer el año de la pregunta 2 pero ahora solo para 2020, segmento cada mes y hago conteo de numero de preguntas por mes.
-
+puts("\n")
+print('-------PREGUNTA 2-<div> view-------')
+puts("\n")
+print('-------FALTA SEGMENTAR 2022-------')
 #------------------
 # Extraer las fechas de la  tabla, falta buscar sol las del 2022 y 2020, por ahora salen todas
 links2 = document.css('.topics ul li div')
+# print links2
+puts("-----------------\n\n\n")
 re = links2.map do |lk|
-  # Con estas tres lineas comentadas extraigo las vistas y las respuestas. replies viw y
-  replies = lk.css('.replies').inner_text
-  views = lk.css('.views').inner_text
-  [replies, views]
+  views = lk.css('.views')
+  print views
 
-  # name = lk.css('.name').children.text.strip.split("\n")[2]
+  # rows = lk.css('.replies')
+  # row = lk.css('::before')
+  # print row
+
+  # replies = lk.css('.replies').inner_text
+  # views = lk.css('.views').inner_text
+  # [replies, views]
 end
 # p re me imprie las vistas y las respuestas eeen un array pero falta segmmentar solo las del 2022
 
- #p re
+# p re
 
 #--------------------------------
 links3 = document.css('.topics ul li div')
