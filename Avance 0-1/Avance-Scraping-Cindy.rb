@@ -33,21 +33,20 @@ print('-------FALTA SEGMENTAR 2022-------')
 links2 = document.css('.topics ul li div')
 # print links2
 puts("-----------------\n\n\n")
-re = links2.map do |lk|
+res = links2.map do |lk|
   views = lk.css('.views')
   print views
-
-  # rows = lk.css('.replies')
-  # row = lk.css('::before')
-  # print row
-
+  puts("\n")
+  replies = lk.css('.replies')
+  print replies
+  # puts '[' + views + ',' + replies + ']' + "\n"
+  # [replies, views]
   # replies = lk.css('.replies').inner_text
   # views = lk.css('.views').inner_text
   # [replies, views]
 end
 # p re me imprie las vistas y las respuestas eeen un array pero falta segmmentar solo las del 2022
-
-# p re
+# p res
 
 #--------------------------------
 links3 = document.css('.topics ul li div')
