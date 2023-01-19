@@ -7,20 +7,25 @@ unless File.readable?('data.html')
   data = URI.open(url).read
   File.open('data.html', 'wb') { |f| f << data }
 end
-
 data = File.read('data.html')
 document = Nokogiri::HTML(data)
+
+# Pregunta 1
+print('---------------PREGUNTA 1-------------------')
+puts("\n")
+print('Pregunta 1: ¿Cómo se llaman los juegos más discutidos en este foro y su número total de preguntas?; Es decir,los nombres de los juegos que han sido tema de discusión desde la creación del foro con su respectivo total de preguntas')
+puts("\n")
+print('--------------------------------------------')
+puts("\n")
+puts("\n")
+
 links = document.css('.categories ul li a')
 result = links.map do |link|
   name, count = link.children
   [name.text.strip, count.text.to_i]
 end
-# Pregunta 1
-print('---------PREGUNTA 1---------')
-puts("\n")
+
 p result
-puts("\n")
-print('---PREGUNTA 2---')
 puts("\n")
 print('-------PREGUNTA 2-<div> view-------')
 puts("\n")
@@ -43,17 +48,22 @@ end
 # p res
 
 #--------------------------------
-links3 = document.css('.topics ul li div')
-re = links3.map do |lk3|
-  name = lk3.css('.name').children.text.strip.split("\n")[2]
-end
+# links3 = document.css('.topics ul li div')
+# re = links3.map do |lk3|
+#   name = lk3.css('.name').children.text.strip.split("\n")[2]
+# end
 
-# Aqui hago  extraccion de fechas
-date = ' '
-size_dates = re.length
-(0..size_dates).each do |i|
-  unless i.nil?
-    date = re[i]
-    print date
-  end
-end
+# # Aqui hago  extraccion de fechas
+# date = ' '
+# size_dates = re.length
+# (0..size_dates).each do |i|
+#   unless i.nil?
+#     date = re[i]
+#     print date
+#   end
+# end
+
+per = document.xpath('//div[@class="name"]/text()[string-length(normalize-space(.)) > 0]')
+              .map { |node| node.to_s[/\d{4}/] }
+
+p per
