@@ -1,6 +1,22 @@
 require 'nokogiri'
 require 'open-uri'
 require 'pp'
+require 'csv'
+
+class Pregunta1_Cindy
+  attr_accessor :juego, :numero
+
+  def initialize(juego, numero)
+    @juego = juego
+    @numero = numero
+  end
+
+  def guardar
+    CSV.open('cindy_q1.csv', 'ab') do |csv|
+      csv << [juego, numero]
+    end
+  end
+end
 # download/cache the data (to speed up testing)
 unless File.readable?('data.html')
   url = 'https://www.bananatic.com/de/forum/games/'
@@ -24,15 +40,30 @@ result = links.map do |link|
   name, count = link.children
   [name.text.strip, count.text.to_i]
 end
+# p result #[["Roblox", 101], ["War Thunder", 57], ....]
 
-p result
+result.each do |elemento|
+  play = elemento[0]
+  number = elemento[1]
+  pregunta = Pregunta1_Cindy.new(play, number)
+  pregunta.guardar
+end
+
+# Pregunta 1
+print('---------------PREGUNTA 2-------------------')
 puts("\n")
-print('-------PREGUNTA 2-<div> view-------')
+print('Pregunta 2: ¿Los 3 temas con mayor cantidad de respuesta y con mayor cantidad de vistas en el año 2022?')
+puts("\n")
+print('--------------------------------------------')
+puts("\n")
 puts("\n")
 links2 = document.css('.topics ul li div')
 # print links2
 puts("-----------------\n\n\n")
 res = links2.map do |lk|
+  name = lk.css('.name  p a').inner_text
+  print name
+  puts("\n")
   views = lk.css('.views')
   print views
   puts("\n")
