@@ -18,7 +18,14 @@ end
 # Pregunta 1
 print('---------PREGUNTA 1---------')
 puts("\n")
-p result
+result.each do |el|
+   game_name=el[0]
+   result_question=el[1]
+  puts "game name: " + game_name
+  puts "result_question: " + result_question.to_s
+  puts "---------"
+end
+#p result
 puts("\n")
 print('---------PREGUNTA 2---------')
 puts("\n")
