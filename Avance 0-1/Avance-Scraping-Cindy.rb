@@ -7,9 +7,9 @@ unless File.readable?('data.html')
   data = URI.open(url).read
   File.open('data.html', 'wb') { |f| f << data }
 end
-
 data = File.read('data.html')
 document = Nokogiri::HTML(data)
+
 links = document.css('.categories ul li a')
 result = links.map do |link|
   name, count = link.children
@@ -20,42 +20,50 @@ print('---------PREGUNTA 1---------')
 puts("\n")
 p result
 puts("\n")
-print('---PREGUNTA 2 y 3 descomentar codigo---')
-#-----------Para pregunta  2 y 3--------------------
-# Pregunta 2, necesito extraer año de la fecha y dos etiquetas
-# Pregunta 3, reutilizo lo dee extraer el año de la pregunta 2 pero ahora solo para 2020, segmento cada mes y hago conteo de numero de preguntas por mes.
-
-#------------------
-# Extraer las fechas de la  tabla, falta buscar sol las del 2022 y 2020, por ahora salen todas
-links2 = document.css('.topics ul li div')
-re = links2.map do |lk|
-  # Con estas tres lineas comentadas extraigo las vistas y las respuestas. replies viw y
-  replies = lk.css('.replies').inner_text
-  views = lk.css('.views').inner_text
-  [replies, views]
-
-  # name = lk.css('.name').children.text.strip.split("\n")[2]
-end
-# p re me imprie las vistas y las respuestas eeen un array pero falta segmmentar solo las del 2022
-
- #p re
-
-#--------------------------------
-links3 = document.css('.topics ul li div')
-re = links3.map do |lk3|
-  name = lk3.css('.name').children.text.strip.split("\n")[2]
-end
-
-# Aqui hago  extraccion de fechas
-fecha = ' '
-size_fechas = re.length
-(0..size_fechas).each do |i|
-  unless i.nil?
-    fecha = re[i]
-    # print fecha
+print('---------PREGUNTA 2---------')
+puts("\n")
+  replies = document.xpath('//div[@class="replies"]/text()[string-length(normalize-space(.)) > 0]')
+                .map { |node| node.to_s[/\d+/] }
+  p replies
+  puts("\n")
+  views = document.xpath('//div[@class="views"]/text()[string-length(normalize-space(.)) > 0]')
+                .map { |node| node.to_s[/\w+/] }
+  p views
+  puts("\n")
+  links2 = document.css('.topics ul li div')
+  topic = links2.map do |lk|
+    name = lk.css('.name  p a').inner_text
+      if name!=""
+        [name]
+      end
   end
-end
+  tema=topic.compact
+  p tema
 
-#-------------------------------------------
+  puts("\n")
+  year = document.xpath('//div[@class="name"]/text()[string-length(normalize-space(.)) > 0]')
+              .map { |node| node.to_s[/\d{4}/] }
 
-# Falta poner todo esto como funciones para poder reutilizar y segmentar haciendo uso de condicionales y estructuras de control.
+  p year
+
+busqueda = "2022"
+indice = 0;
+
+year.each do |elemento|
+    #print elemento, "\n"
+    if elemento == busqueda
+        #puts "El elemento #{busqueda} está en el índice #{indice}"
+        t=(tema[indice])[0].to_s
+        r=replies[indice]
+        v=views[indice]
+        y=year[indice]
+        puts "tema: "+t
+        puts "replies: "+r
+        puts "vista: "+v
+        puts "year: "+y
+        puts "--------------"
+    end
+    indice = indice + 1
+  end
+  print('---------PREGUNTA 2---------')
+  
