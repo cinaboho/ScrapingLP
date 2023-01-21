@@ -1,6 +1,23 @@
 require 'nokogiri'
 require 'open-uri'
 require 'pp'
+require 'csv'
+
+class Pregunta1_Cindy
+  attr_accessor :juego, :numero
+
+  def initialize(juego, numero)
+    @juego = juego
+    @numero = numero
+  end
+
+  def guardar
+    CSV.open('cindy_q1.csv', 'ab') do |csv|
+      csv << [juego, numero.to_s]
+    end
+  end
+end
+
 # download/cache the data (to speed up testing)
 unless File.readable?('data.html')
   url = 'https://www.bananatic.com/de/forum/games/'
@@ -18,17 +35,22 @@ end
 # Pregunta 1
 print('---------PREGUNTA 1---------')
 puts("\n")
-result.each do |el|
-   game_name=el[0]
-   result_question=el[1]
-  puts "game name: " + game_name
-  puts "result_question: " + result_question.to_s
-  puts "---------"
+CSV.open('cindy_q1.csv', 'wb') do |csv|
+  csv << ["Juego","Preguntas"]
+end
+result.each do |elemento|
+  play = elemento[0]
+  number = elemento[1]
+  puts "Juego: "+play
+  puts "Preguntas: "+number.to_s
+  puts "--------------"
+  pregunta = Pregunta1_Cindy.new(play, number)
+  pregunta.guardar
 end
 #p result
 puts("\n")
 print('---------PREGUNTA 2---------')
-puts("\n")
+
   replies = document.xpath('//div[@class="replies"]/text()[string-length(normalize-space(.)) > 0]')
                 .map { |node| node.to_s[/\d+/] }
   #p replies
