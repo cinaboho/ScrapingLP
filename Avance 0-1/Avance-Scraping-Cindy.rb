@@ -17,6 +17,22 @@ class Pregunta1_Cindy
     end
   end
 end
+class Pregunta2_Cindy
+  attr_accessor :tema, :respuesta, :vista, :year
+
+  def initialize(tema, respuesta, vista, year)
+    @tema = tema
+    @respuesta = respuesta
+    @vista = vista
+    @year = year
+  end
+
+  def guardar
+    CSV.open('cindy_q2.csv', 'ab') do |csv|
+      csv << [tema, respuesta, vista, year]
+    end
+  end
+end
 
 # download/cache the data (to speed up testing)
 unless File.readable?('data.html')
@@ -41,15 +57,17 @@ end
 result.each do |elemento|
   play = elemento[0]
   number = elemento[1]
+  if number.to_i != 0
   puts "Juego: "+play
   puts "Preguntas: "+number.to_s
   puts "--------------"
   pregunta = Pregunta1_Cindy.new(play, number)
   pregunta.guardar
+  end
 end
 #p result
 puts("\n")
-print('---------PREGUNTA 2---------')
+print('---------PREGUNTA 2 y 3---------')
 
   replies = document.xpath('//div[@class="replies"]/text()[string-length(normalize-space(.)) > 0]')
                 .map { |node| node.to_s[/\d+/] }
@@ -81,7 +99,6 @@ indice = 0;
 year.each do |elemento|
     #print elemento, "\n"
     if elemento == busqueda
-        #puts "El elemento #{busqueda} está en el índice #{indice}"
         t=(tema[indice])[0].to_s
         r=replies[indice]
         v=views[indice]
@@ -94,3 +111,5 @@ year.each do |elemento|
     end
     indice = indice + 1
   end
+
+  puts("\n")

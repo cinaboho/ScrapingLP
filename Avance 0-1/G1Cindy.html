@@ -61,7 +61,7 @@ d3.csv(chartData).then(function(datapoints) {
       Juego.push(datapoints[i].Juego)
       Preguntas.push(datapoints[i].Preguntas)
     }
-   // setup 
+   // setup
    const data = {
        labels: Juego,
       datasets: [{
@@ -89,7 +89,7 @@ d3.csv(chartData).then(function(datapoints) {
       }]
     };
 
-    // config 
+    // config
     const config = {
       type: 'bar',
       data,
@@ -109,8 +109,6 @@ d3.csv(chartData).then(function(datapoints) {
     );
 });
 
-
-    
     </script>
 
   </body>
