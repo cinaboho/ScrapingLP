@@ -28,6 +28,7 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+	<link rel="stylesheet" type="text/css" href="lopez/styleLopez.css">
 </head>
 
 <body>
@@ -238,12 +239,28 @@
                                     </ul>
                                 </li>
                             </ul>
-                                                       
-                           
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Forms &amp; Tables</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                                              <li>
+                                    <a href="bs-basic-table.html">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Basic Table</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
 
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Chart &amp; Maps</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                                               
+                                <li class="active">
+                                    <a href="chart.html">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Chart</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                
                                 <li>
                                     <a href="chartBohorquez.html">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
@@ -277,7 +294,7 @@
                             <div class="main-body">
                                 <div class="page-wrapper">                                    
 									 <div class="page-body">
-									  <div class="row">                                            
+										<div class="row">                                            
                                             <div class="col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
@@ -325,19 +342,22 @@
                                             <div class="col-md-12 col-lg-6">
                                                 <div class="card">
                                                     <div class="card-header">
-													<h5>Seleccione El grafico</h5>
+													<h5>Seleccione el grafico</h5>
 														
                                                     </div>
                                                     <div class="card-block">
                                                          <!--<div id="morris-extra-area"></div>-->
 														 <div class="row">
 															<div class="col-md-1 py-1 mx-2">
-																<button type="button" class="btn btn-primary" id="botonSubir"  onclick="graficoBarra()">BARRA</button>
+																<button type="button" class="btn btn-primary btn-round botoncito" id="botonSubir"  onclick="graficoBarra()">BARRA</button>
 																
 															</div>
 															<div class="col-md-1 py-1 mx-5">
-																<button type="button" class="btn btn-primary" id="botonSubir"  onclick="graficoPIE()">PIE</button>
+																<button type="button" class="btn btn-primary btn-round botoncito " id="botonSubir"  onclick="graficoPIE()">PIE</button>
 															</div>
+															<div class="col-md-1 py-1 mx-2">
+																<button type="button" class="btn btn-primary btn-round botoncito " id="botonSubir"  onclick="graficoLinea()">Linea</button>
+															</div>															
 														</div>
                                                     </div>
                                                 </div>
@@ -346,8 +366,8 @@
 										<div class="row">                                            
                                             <div class="col-md-12 col-lg-6">
                                                 <div class="card">
-                                                    <div class="card-header">
-                                                        <h5>Datos del Archivo</h5>                                                        
+                                                    <div class="card-header">                                                        
+														<h5 id="nombre_archivo"></h5>                                                          
                                                     </div>
                                                     <div class="card-block">
                                                         <div class="py-1 mx-2" id="csv-display" style="overflow: scroll;">
@@ -361,12 +381,28 @@
                                                 <div class="card">
                                                     <div class="card-header">                                                        
                                                     </div>
-                                                    <div class="card-block">
+                                                    <div class="card-block grafico-tamano">
                                                         <canvas id="grafico"></canvas>
                                                     </div>
                                                 </div>
                                             </div>                                           
                                         </div>
+										<div class="row">                                            
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+														<h5>Data</h5>
+														   
+                                                    </div>
+                                                    <div class="card-block">
+                                                         <!-- <div id="morris-bar-chart"></div>-->
+														  <div class="py-1 mx-2" id="csv-data" style="overflow: scroll;">
+				
+														</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+										</div>
                                     </div>
 
                                 </div>
@@ -453,13 +489,12 @@
 <script src="assets/js/demo-12.js"></script>
 <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 
-
-<script src = "lopez/scriptLopez.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js" integrity="sha512-Y8iWYJDo6HiTo5xtml1g4QqHtl/PO1w+dmUpQfQSOTqKNsMhExfyPN2ncNAe9JuJUSKzwK/b6oaNPop4MXzkwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.js" integrity="sha512-2ypsPur7qcA+2JjmmIJR1c4GWFqTLIe1naXXplraMg0aWyTOyAMpOk+QL+ULpzwrO/GdwA3qB3FhVyyiR8gdhw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script src = "lopez/scriptLopez.js"></script>
 
 
 </body>

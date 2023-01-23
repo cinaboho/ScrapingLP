@@ -1,4 +1,44 @@
-html, body {
-  height: 100%;
-  width: 100%;
+.botoncito{
+	width:100px;
+}
+
+.grafico-tamano{	
+	height:500px;
+	display: flex;  
+	justify-content:center;
+}
+
+.tablita td {		
+	white-space: normal !important;
+}
+
+.tablita th {
+	 text-align: center;
+}
+
+.tablita td:first-child {		
+	max-width: 300px;
+	text-align: left;
+}
+
+.tablita td:nth-child(2) {
+	max-width: 100px;
+	text-align: center;
+}
+
+.tablita td:nth-child(3) {
+	max-width: 400px;
+	text-align: left;
+}
+
+.tablita td:nth-child(4) {	
+	text-align: center;
+}
+
+.tablita td,th:nth-child(5) {
+	 text-align: right;
+}
+
+.tablita td,th:nth-child(6) {
+	 text-align: right;
 }
