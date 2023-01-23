@@ -1,5 +1,6 @@
+
 $.ajax({
-    url: 'viviana_questions.csv',
+    url: 'http://localhost:8079/vivianacsv/viviana_questions.csv',
     dataType: 'text',
   }).done(successFunction);
 
@@ -37,3 +38,94 @@ $.ajax({
     table += '</table>';
     $('.table-responsive').append(table);
   }
+
+  
+  validateUser=new Set();
+  var labels_cantidad=new Object();
+  const chartData='http://localhost:8079/vivianacsv/3viviana_question.csv'
+  Papa.parse(chartData, {
+	download: true,
+	step: function(row) {
+        if (!validateUser.has(row.data[0]) && row.data[1]!=""){
+            validateUser.add(row.data[0])
+            if (!row.data[1]==undefined || isNaN(labels_cantidad[row.data[1]])){
+                labels_cantidad[row.data[1]]=1;
+            }
+            else{
+                valor=labels_cantidad[row.data[1]];
+                valor+=1;
+                labels_cantidad[row.data[1]]=valor;
+            }
+        }
+    }    ,
+    complete: function() {
+        console.log(labels_cantidad);
+
+var etiquetas=Object.keys(labels_cantidad);
+var cantidad=Object.values(labels_cantidad);
+
+console.log(etiquetas);
+
+
+
+const data = {
+    labels: etiquetas,
+    datasets: [{
+      label: 'Top Edades',
+      data: cantidad,
+      backgroundColor: [
+        'rgba(255, 26, 104, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(0, 0, 0, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 26, 104, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(0, 0, 0, 1)'
+      ],
+      borderWidth: 1
+    }]
+  };
+
+  // config 
+  const config = {
+    type: 'bar',
+    data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+
+  // render init block
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+
+
+
+
+
+
+
+
+
+
+
+		console.log("All done!");
+	}
+});
+
+
