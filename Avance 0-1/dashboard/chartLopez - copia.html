@@ -84,7 +84,51 @@
                                 </a>
                             </li>
                         </ul>
-                        
+                        <ul class="nav-right">
+                            <li class="header-notification">
+                                <a href="#!">
+                                    <i class="ti-bell"></i>
+                                    <span class="badge bg-c-pink"></span>
+                                </a>
+                                <ul class="show-notification">
+                                    <li>
+                                        <h6>Notifications</h6>
+                                        <label class="label label-danger">New</label>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center" src="assets/images/user.png" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">John Doe</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center" src="assets/images/user.png" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">Joseph William</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center" src="assets/images/user.png" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">Sara Soudein</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                         
+                        </ul>
 
                     </div>
                 </div>
@@ -254,35 +298,79 @@
                                             <div class="col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
+														<h5>Preguntas</h5>
+														   
+                                                    </div>
+                                                    <div class="card-block">
+                                                         <!-- <div id="morris-bar-chart"></div>-->
+														<div class="row"> 
+															<div class="col-md-12">
+																<span>1.- ¿Cuál es la cantidad de preguntas que hacen referencias a las diferentes versiones de PlayStation? (Nota: preguntas que contengan las siguientes palabras PS1, PS2, PS3, PS4, PS5)</span>														 
+															</div>
+														</div>
+														<div class="row"> 
+															<div class="col-md-12">
+																<span>2.- ¿Cuál es el ranking de los cinco usuarios que más preguntas han generado?</span>														 
+															</div>
+														</div>
+														<div class="row"> 
+															<div class="col-md-12">
+																<span>3.- ¿Cuál es la cantidad de pregunta que se realizaron en los años 2020, 2021, 2022?</span>														 
+															</div>
+														</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+										</div>
+                                        <div class="row">                                            
+                                            <div class="col-md-12 col-lg-6">
+                                                <div class="card">
+                                                    <div class="card-header">
 														<h5>Seleccione Archivo de los datos</h5>
 														   
                                                     </div>
                                                     <div class="card-block">
                                                          <!-- <div id="morris-bar-chart"></div>-->
-														<div class="col-md-6 py-1 mx-2">
+														 <div class="col-md-6 py-1 mx-2">
 															<!--<label for="formFile" class="form-label">Seleccione el archivo csv</label>-->
 															<input class="form-control" type="file" onchange="procesarArchivo()" id="formFile"  accept="text/csv">
 														</div> 
                                                     </div>
                                                 </div>
                                             </div>
-										</div>
-										
-										<div class="row">                                            
-                                            <div class="col-md-12">
+                                            
+                                            <div class="col-md-12 col-lg-6">
                                                 <div class="card">
                                                     <div class="card-header">
-														<h5>¿Cuál es la cantidad de preguntas que hacen referencias a las diferentes versiones de PlayStation? (Nota: preguntas que contengan las siguientes palabras PS1, PS2, PS3, PS4, PS5)</h5>
-														   
-                                                    </div>                                                    
+													<h5>Seleccione el grafico</h5>
+														
+                                                    </div>
+                                                    <div class="card-block">
+                                                         <!--<div id="morris-extra-area"></div>-->
+														 <div class="row">
+															<div class="col-md-1 py-1 mx-2">
+																<button type="button" class="btn btn-primary btn-round botoncito" id="botonSubir"  onclick="graficoBarra()">BARRA</button>
+																
+															</div>
+															<div class="col-md-1 py-1 mx-5">
+																<button type="button" class="btn btn-primary btn-round botoncito " id="botonSubir"  onclick="graficoPIE()">PIE</button>
+															</div>
+															<div class="col-md-1 py-1 mx-2">
+																<button type="button" class="btn btn-primary btn-round botoncito " id="botonSubir"  onclick="graficoLinea()">Linea</button>
+															</div>															
+														</div>
+                                                    </div>
                                                 </div>
-                                            </div>
-										</div>                                        
+                                            </div>                                           
+                                        </div>
 										<div class="row">                                            
                                             <div class="col-md-12 col-lg-6">
-                                                <div class="card">                                                    
+                                                <div class="card">
+                                                    <div class="card-header">                                                        
+														<h5 id="nombre_archivo"></h5>                                                          
+                                                    </div>
                                                     <div class="card-block">
-                                                        <div class="py-1 mx-2" id="display1" style="overflow: scroll;">
+                                                        <div class="py-1 mx-2" id="csv-display" style="overflow: scroll;">
 				
 														</div>
                                                     </div>
@@ -290,74 +378,15 @@
                                             </div>
                                             
                                             <div class="col-md-12 col-lg-6">
-                                                <div class="card">                                                    
-                                                    <div class="card-block grafico-tamano">
-                                                        <canvas id="grafico1"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>                                           
-                                        </div>
-										
-										<div class="row">                                            
-                                            <div class="col-md-12">
                                                 <div class="card">
-                                                    <div class="card-header">
-														<h5>¿Cuál es el ranking de los cinco usuarios que más preguntas han generado?</h5>
-														   
-                                                    </div>                                                    
-                                                </div>
-                                            </div>
-										</div>                                        
-										<div class="row">                                            
-                                            <div class="col-md-12 col-lg-6">
-                                                <div class="card">                                                    
-                                                    <div class="card-block">
-                                                        <div class="py-1 mx-2" id="display2" style="overflow: scroll;">
-				
-														</div>
+                                                    <div class="card-header">                                                        
                                                     </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-12 col-lg-6">
-                                                <div class="card">                                                    
                                                     <div class="card-block grafico-tamano">
-                                                        <canvas id="grafico2"></canvas>
+                                                        <canvas id="grafico"></canvas>
                                                     </div>
                                                 </div>
                                             </div>                                           
                                         </div>
-										
-										<div class="row">                                            
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-														<h5>¿Cuál es la cantidad de pregunta que se realizaron en los años 2020, 2021, 2022?</h5>
-														   
-                                                    </div>                                                    
-                                                </div>
-                                            </div>
-										</div>                                        
-										<div class="row">                                            
-                                            <div class="col-md-12 col-lg-6">
-                                                <div class="card">                                                    
-                                                    <div class="card-block">
-                                                        <div class="py-1 mx-2" id="display3" style="overflow: scroll;">
-				
-														</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-12 col-lg-6">
-                                                <div class="card">                                                    
-                                                    <div class="card-block grafico-tamano">
-                                                        <canvas id="grafico3"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>                                           
-                                        </div>
-										
 										<div class="row">                                            
                                             <div class="col-md-12">
                                                 <div class="card">

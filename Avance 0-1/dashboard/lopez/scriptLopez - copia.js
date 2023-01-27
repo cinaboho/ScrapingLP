@@ -1,11 +1,9 @@
-//var dataGlobal;
-
-
-
-//var datosCSV;
+var dataGlobal,dataEtiquetas,dataValores;
+const ctx = document.getElementById("grafico").getContext('2d');	 
+var datosCSV;
 
 	//https://stackoverflow.com/questions/7431268/how-to-read-data-from-csv-file-using-javascript
-	/*$.ajax({
+	$.ajax({
 		type: "GET",  
 		url: "lopez/johanna_questions.csv",
 		dataType: "text",       
@@ -14,74 +12,32 @@
 			datosCSV = $.csv.toArrays(response);
 			generateHtmlTableData(datosCSV);
 		}   
-	});*/
+	});
 	  
 	  
 	//https://stackoverflow.com/questions/30223361/js-filereader-read-csv-from-local-file-jquery-csv	
 	function procesarArchivo(){		
 		var file = document.getElementById("formFile").files[0];
 		var name = document.getElementById("formFile").files[0].name;
-		//document.getElementById('nombre_archivo').innerHTML="Datos del archivo "+name;		
+		document.getElementById('nombre_archivo').innerHTML="Datos del archivo "+name;		
 		var contenido;		
 		const reader = new FileReader();
 		reader.readAsText(file);
 		reader.onload = function(event){
-			var csv = event.target.result;
-			dataCSV = $.csv.toArrays(csv);
-			generateHtmlTableData(dataCSV);
-			pregunta1(dataCSV);
-			pregunta2(dataCSV);
-			pregunta3(dataCSV);
+			var csv1 = event.target.result;
+			dataGlobal = $.csv.toArrays(csv1);
+			dataValores=dataGlobal.map(item => item[1]);
+			dataEtiquetas=dataGlobal.map(item => item[0]);
+			dataValores.splice(0, 1);
+			dataEtiquetas.splice(0, 1);			
+			generateHtmlTableEstadistica(dataGlobal);
+			graficoPIE();
 		 };  
 	};
 	
-	function pregunta1(dataCSV){
-		const ctx = document.getElementById("grafico1").getContext('2d');		
-		var estadisticaArray=[];
-		var nombre;
-		for (var i = 1; i <= 5; i++) {			
-			nombre='PS' + i.toString();
-			var res=dataCSV.filter ( (item) => item[0].toUpperCase().includes(nombre)) ;			
-			estadisticaArray.push([nombre,res.length]);
-		}
-		generateHtmlTableEstadistica(estadisticaArray,"display1")		
-		graficoBarra(ctx,estadisticaArray);
-	}
-	
-	function pregunta2(dataCSV){
-		const ctx = document.getElementById("grafico2").getContext('2d');		
-		var estadisticaArray=[];		
-		var result =dataCSV.map( (item) => [item[1]]).reduce((prev, cur) => ((prev[cur] = prev[cur] + 1 || 1), prev), {});				
-		for (var item in result) {
-			estadisticaArray.push([item, result[item]]);
-		}
-		estadisticaArray.sort(function(a, b) {
-			return b[1] - a[1];
-		});	
-		estadisticaArray.splice(5,estadisticaArray.length-5);		
-		generateHtmlTableEstadistica(estadisticaArray,"display2")		
-		graficoPIE(ctx,estadisticaArray);		
-	}
-	
-	function pregunta3(dataCSV){
-		const ctx = document.getElementById("grafico3").getContext('2d');		
-		var estadisticaArray=[];		
-		for (var i = 2020; i <= 2022; i++) {						
-			var res=dataCSV.filter ( (item) => item[3].toUpperCase().includes(i.toString())) ;			
-			estadisticaArray.push(['Año'+i.toString(),res.length]);
-		}
-		generateHtmlTableEstadistica(estadisticaArray,"display3")		
-		graficoLinea(ctx,estadisticaArray);	
-	}
-	
-
-	
-	
 	//https://parzibyte.me/blog/2021/01/03/chart-js-tutorial-ejemplos-graficas-web/
 	//https://parzibyte.me/blog/2018/05/03/reiniciar-limpiar-grafica-chart-js/
-	function graficoBarra(ctx,array){	
-		var dataEtiquetas=array.map(item => item[0]);
-		var dataValores=array.map(item => item[1]);
+	function graficoBarra(){		
 		if (window.grafica) {
 			window.grafica.clear();
 			window.grafica.destroy();
@@ -124,15 +80,16 @@
 	
 	//https://stackoverflow.com/questions/59681505/chartjs-adding-percentages-to-pie-chart-legend
 	//label porcentaje
-	function graficoPIE(ctx,array){	
-		var dataEtiquetas=array.map(item => item[0]);
-		var dataValores=array.map(item => item[1]);	
+	function graficoPIE(){					
 		total = dataValores.reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue));
 		labelsvalues = dataValores.map(function(value,i){
 			let p= Math.round((value / total) * 100) + '%';
 				return dataEtiquetas[i]+' '+p;
 			});						
-		
+		if (window.grafica) {
+			window.grafica.clear();
+			window.grafica.destroy();
+		}		
 		var pieColors = [
 		  'rgb(255, 99, 132)',
 		  'rgb(54, 162, 235)',
@@ -207,9 +164,11 @@
 	
 	};
 	
-	function graficoLinea(ctx,array){			
-		var dataEtiquetas=array.map(item => item[0]);
-		var dataValores=array.map(item => item[1]);		
+	function graficoLinea(){		
+		if (window.grafica) {
+			window.grafica.clear();
+			window.grafica.destroy();
+		}		
 		var barColors = ["red", "green","blue","orange","brown"];	  
 		window.grafica = new Chart(ctx, {
 			type: 'line',
@@ -245,40 +204,42 @@
 		});  
 	};	
 		
-	function generateHtmlTableEstadistica(data,nombre) {
+	function generateHtmlTableEstadistica(data) {
 		var html = '<table  class="table table-condensed table-hover table-striped">';
 
 		if(typeof(data[0]) === 'undefined') {
 			return null;
 		} else {
-			html += '<thead>';
+			$.each(data, function( index, row ) {
+				//bind header
+				if(index == 0) {
+					html += '<thead>';
 					html += '<tr>';
-					
+					$.each(row, function( index, colData ) {
 						html += '<th>';
-						html += "NOMBRE";
+						html += colData;
 						html += '</th>';
-						html += '<th>';
-						html += "VALOR";
-						html += '</th>';
-					
+					});
 					html += '</tr>';
 					html += '</thead>';
 					html += '<tbody>';
-			$.each(data, function( index, row ) {				
+				} else {
 					html += '<tr>';
 					$.each(row, function( index, colData ) {
 						html += '<td>';
 						html += colData;
 						html += '</td>';				
 					});
-					html += '</tr>';				
+					html += '</tr>';
+				}
 			});
 			//console.log(data);
 			html += '</tbody>';
 			html += '</table>';	
-			document.getElementById(nombre).innerHTML = '';		
-			$('#'+nombre).append(html);
-		}		
+			document.getElementById("csv-display").innerHTML = '';		
+			$('#csv-display').append(html);
+		}
+		//data.forEach(element => console.log(element));
 	}
 	
 	function generateHtmlTableData(data) {
