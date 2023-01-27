@@ -1,6 +1,6 @@
 
 $.ajax({
-    url: 'http://localhost:8079/vivianacsv/viviana_questions.csv',
+    url: 'munoz/vivianacsv/viviana_questions.csv',
     dataType: 'text',
   }).done(successFunction);
 
@@ -42,7 +42,7 @@ $.ajax({
   
   validateUser=new Set();
   var labels_cantidad=new Object();
-  const chartData='http://localhost:8079/vivianacsv/3viviana_question.csv'
+  const chartData='munoz/vivianacsv/3viviana_question.csv'
   Papa.parse(chartData, {
 	download: true,
 	step: function(row) {
