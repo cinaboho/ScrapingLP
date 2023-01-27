@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Análisis de datos, Grupo 2 </title>
+    <title>Análisis de datos, Muñoz Grupo 2 </title>
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -18,7 +18,7 @@
         content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="CodedThemes">
     <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/cat2.ico" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
     <!-- Required Fremwork -->
@@ -30,29 +30,9 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
-    <style>
-        .chartMenu p {
-            padding: 10px;
-            font-size: 20px;
-        }
+    <link rel="stylesheet" type="text/css" href="munoz/styleMunoz.css">
 
-        .chartCard {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chartBox {
-            width: 700px;
-            padding: 10px;
-            border-radius: 10px;
-            border: solid 3px rgba(54, 162, 235, 1);
-            background: white;
-        }
-    </style>
 </head>
-
 <body>
     <!-- Pre-loader start -->
     <div class="theme-loader">
@@ -95,7 +75,6 @@
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
-
             <nav class="navbar header-navbar pcoded-header">
                 <div class="navbar-wrapper">
 
@@ -286,7 +265,6 @@
                     </nav>
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">
-
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-header start -->
@@ -296,7 +274,7 @@
                                                 <div class="page-header-title">
                                                     <i class="icofont icofont-chart-bar-graph bg-c-blue"></i>
                                                     <div class="d-inline">
-                                                        <h4>Viviana Chart</h4>
+                                                        <h4>Gráfico Pastel - (Año, Cantidad) </h4>
                                                         <span>Pregunta 1: Entre los años 2020 y lo que va del 2023,
                                                             ¿Cuál fue el año donde se mencionó más acerca del juego
                                                             Fortnite/Fornite?.</span>
@@ -321,47 +299,53 @@
                                         </div>
                                     </div>
                                     <!-- Page-header end -->
-
-
-                                    <!-- Gráfico pregunta 2 -->
-
-                                    <div class="page-header card">
-                                        <div class="row align-items-end">
-                                            <div class="col-lg-8">
-                                                <div class="page-header-title">
-                                                    <i class="icofont icofont-chart-bar-graph bg-c-blue"></i>
-                                                    <div class="d-inline">
-                                                        <h4>Viviana Chart</h4>
-                                                        <span>Pregunta 2: .</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                           
-                                        </div>
-                                    </div>
-
-                                    <div class="page-header card">
-                                        <div class="row align-items-end">
-                                            <div class="col-lg-8">
-                                                <div class="page-header-title">
-                                                    <i class="icofont icofont-chart-bar-graph bg-c-blue"></i>
-                                                    <div class="d-inline">
-                                                        <h4>Viviana Chart</h4>
-                                                        <span>Pregunta 3: Entre los datos recolectados del 2020 hasta lo que va del 2023, ¿Cuáles son el top 5 de las edades más frecuentes de las personas que comentan en el foro?.</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                           
-                                        </div>
-                                    </div>
-
                                     <div class="page-body">
                                         <div class="row">
                                             <div class="col-md-12 col-lg-15">
                                                 <div class="card">
                                                     <div class="chartCard">
                                                         <div class="chartBox">
-                                                            <canvas id="myChart"></canvas>
+                                                            <canvas id="myChart" class="grafico1"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Gráfico pregunta 2 -->
+
+                                    <div class="page-header card">
+                                        <div class="row align-items-end">
+                                                <div class="page-header-title">
+                                                    <i class="icofont icofont-chart-bar-graph bg-c-blue"></i>
+                                                    <div class="d-inline">
+                                                        <h4>Viviana Chart</h4>
+                                                        <span>Pregunta 2: .</span>
+                                                    </div>
+                                                </div>                                           
+                                        </div>
+                                    </div>
+
+                                    <div class="page-header card">
+                                        <div class="row align-items-end">
+                                                <div class="page-header-title">
+                                                    <i class="icofont icofont-chart-bar-graph bg-c-blue"></i>
+                                                    <div class="d-inline">
+                                                        <h4>Gráfico de Barras - (Edad, Cantidad)</h4>
+                                                        <span>Pregunta 3: Entre los datos recolectados del 2020 hasta lo que va del 2023, ¿Cuáles son las edades que mas se frecuentan entre las personas que comentan en el foro?.</span>
+                                                    </div>
+                                                </div>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="page-body">
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-15">
+                                                <div class="card">
+                                                    <div class="chartCard">
+                                                        <div class="chartBox">
+                                                            <canvas id="myChart" class="grafico3"></canvas>
                                                         </div>
                                                     </div>
                                                 </div>
