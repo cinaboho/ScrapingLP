@@ -2,37 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'pp'
 require 'csv'
-
-class Pregunta1_Cindy
-  attr_accessor :juego, :numero
-
-  def initialize(juego, numero)
-    @juego = juego
-    @numero = numero
-  end
-
-  def guardar
-    CSV.open('cindy_q1.csv', 'ab') do |csv|
-      csv << [juego, numero.to_s]
-    end
-  end
-end
-class Pregunta2_Cindy
-  attr_accessor :tema, :respuesta, :vista, :year
-
-  def initialize(tema, respuesta, vista, year)
-    @tema = tema
-    @respuesta = respuesta
-    @vista = vista
-    @year = year
-  end
-
-  def guardar
-    CSV.open('cindy_q2.csv', 'ab') do |csv|
-      csv << [tema, respuesta, vista, year]
-    end
-  end
-end
+require_relative 'Metodos.rb'
 
 # download/cache the data (to speed up testing)
 unless File.readable?('data.html')
@@ -57,17 +27,16 @@ end
 result.each do |elemento|
   play = elemento[0]
   number = elemento[1]
-  if number.to_i != 0
+
   puts "Juego: "+play
   puts "Preguntas: "+number.to_s
   puts "--------------"
   pregunta = Pregunta1_Cindy.new(play, number)
   pregunta.guardar
-  end
 end
 #p result
 puts("\n")
-print('---------PREGUNTA 2 y 3---------')
+print('---------PREGUNTA 2---------')
 
   replies = document.xpath('//div[@class="replies"]/text()[string-length(normalize-space(.)) > 0]')
                 .map { |node| node.to_s[/\d+/] }
@@ -95,10 +64,11 @@ print('---------PREGUNTA 2 y 3---------')
 
 busqueda = "2022"
 indice = 0;
-
+CSV.open('cindy_q2.csv', 'wb') do |csv|
+  csv << ["Tema","Num_Respuestas","Num_Vistas","Año"]
+end
 year.each do |elemento|
-    #print elemento, "\n"
-    if elemento == busqueda
+    # if elemento == busqueda
         t=(tema[indice])[0].to_s
         r=replies[indice]
         v=views[indice]
@@ -108,8 +78,26 @@ year.each do |elemento|
         puts "vista: "+v
         puts "year: "+y
         puts "--------------"
-    end
+        pregunta = Pregunta2_Cindy.new(t, r, v, y)
+        pregunta.guardar
+    # end
     indice = indice + 1
   end
 
   puts("\n")
+print('---------PREGUNTA 3---------')
+month = document.xpath('//div[@class="name"]/text()[string-length(normalize-space(.)) > 0]').map { 
+  |node| node.to_s[/\d{2}.\d{2}.\d{4}/]
+}
+CSV.open('cindy_q3.csv', 'wb') do |csv|
+  csv << ["Mes","Año"]
+end
+id=0;
+month.each do |x|
+  mes= x[3]+x[4]
+  year= x[6]+x[7]+x[8]+x[9]
+  puts year
+  pregunta = Pregunta3_Cindy.new(mes, year)
+  pregunta.guardar
+  id = id+1
+end
