@@ -1,0 +1,16 @@
+.chartMenu p {
+    padding: 10px;
+    font-size: 20px;
+}
+.chartCard {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chartBox {
+    width: 700px;
+    padding: 10px;
+    border-radius: 10px;
+    background: white;
+}
