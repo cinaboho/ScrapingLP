@@ -5,20 +5,23 @@
 //var datosCSV;
 
 	//https://stackoverflow.com/questions/7431268/how-to-read-data-from-csv-file-using-javascript
-	/*$.ajax({
+	$.ajax({
 		type: "GET",  
 		url: "lopez/johanna_questions.csv",
 		dataType: "text",       
 		success: function(response)  
 		{
-			datosCSV = $.csv.toArrays(response);
-			generateHtmlTableData(datosCSV);
+			var dataCSV = $.csv.toArrays(response);
+			generateHtmlTableData(dataCSV);
+			pregunta1(dataCSV);
+			pregunta2(dataCSV);
+			pregunta3(dataCSV);
 		}   
-	});*/
+	});
 	  
 	  
 	//https://stackoverflow.com/questions/30223361/js-filereader-read-csv-from-local-file-jquery-csv	
-	function procesarArchivo(){		
+	/*function procesarArchivo(){		
 		var file = document.getElementById("formFile").files[0];
 		var name = document.getElementById("formFile").files[0].name;
 		//document.getElementById('nombre_archivo').innerHTML="Datos del archivo "+name;		
@@ -33,7 +36,7 @@
 			pregunta2(dataCSV);
 			pregunta3(dataCSV);
 		 };  
-	};
+	};*/
 	
 	function pregunta1(dataCSV){
 		const ctx = document.getElementById("grafico1").getContext('2d');		

@@ -20,7 +20,7 @@ class Pregunta
   end
 
   def guardar
-    CSV.open('johanna_questions.csv', 'ab') do |csv|
+    CSV.open('dashboard/lopez/johanna_questions.csv', 'ab') do |csv|
       csv << [titulo.to_s, autor.to_s, link.to_s, fecha.to_s, respuestas.to_s, visitas.to_s]
     end
   end
@@ -60,75 +60,6 @@ CSV.open('johanna_questions.csv', 'wb') do |csv|
   csv << %w[Titulo Autor Link Fecha Respuestas Visitas]
 end
 
-(1..10).each do |i|
+(1..20).each do |i|
   parsear(link + i.to_s)
 end
-
-# def cabecera(archivo)
-#   CSV.open(archivo, 'wb') do |csv|
-#     csv << %w[Nombre Valor]
-#   end
-# end
-#
-# def guardar(archivo, nombre, valor)
-#   CSV.open(archivo, 'ab') do |csv|
-#     csv << [nombre.to_s, valor.to_s]
-#   end
-# end
-# data = CSV.parse(File.read('johanna_questions.csv'), headers: true)
-#
-#
-# Pregunta 1: ¿Cuál es la cantidad de preguntas que hacen referencias a las diferentes versiones de PlayStation? (Nota: preguntas que contengan las siguientes palabras PS1, PS2, PS3, PS4, PS5).
-#
-# puts "\nCantidad de Preguntas PS"
-# archivo='johanna_estadisticas_ps.csv'
-# cabecera(archivo)
-# (1..5).each do |i|
-#   # filtramos con select
-#   # upcase para convertir todo a mayuscula para hacer bien la comparacion
-#   # con include lo que contenga la palabra PS1,2,3,4,5
-#   dataPS = data.select { |item| item['Titulo'].upcase.include?('PS' + i.to_s) }
-#   guardar(archivo,'PS' + i.to_s,dataPS.count.to_s)
-#   print('PS' + i.to_s + ' - ' + dataPS.count.to_s)
-#   print("\n")
-# end
-#
-# Pregunta 2: ¿Cuál es el ranking de los cinco usuarios que más preguntas han generado?
-#
-# data.each do |pregunta|
-#  puts pregunta['Autor']
-# end
-#
-# https://www.iteramos.com/pregunta/102231/como-agrupar-por-conteo-en-array-sin-utilizar-el-bucle
-# segun ejemplo se puede agrupar y sumar su contenido
-# lo que entendi es que agrupa y en el mapeo suma
-# result = Hash[data.group_by { |x| x['Autor'] }.map { |k, v| [k, v.size] }]
-# result.each do |key, value|
-#    puts "#{key}:#{value}"
-# end
-#
-# ordenamos los usuarios
-# rankingUsuarios = result.sort { |a1, a2| a2[1] <=> a1[1] }
-# archivo='johanna_estadisticas_ranking.csv'
-# cabecera(archivo)
-# puts "\nRanking 5 de Usuarios"
-# (0..4).each do |x|
-#   puts "Rank # #{x + 1}"
-#   puts 'Usuario: ' + rankingUsuarios[x][0].to_s
-#   puts 'Numero: ' + rankingUsuarios[x][1].to_s
-#   guardar(archivo,rankingUsuarios[x][0].to_s,rankingUsuarios[x][1].to_s)
-# end
-#
-# Pregunta 3: ¿Cuál es la cantidad de pregunta que se realizaron en los años 2020, 2021, 2022?
-#
-# puts "\nCantidad Preguntas años 2020, 2021, 2022"
-# archivo='johanna_estadisticas_anios.csv'
-# cabecera(archivo)
-# (2020..2022).each do |i|
-#   # filtramos con select
-#   # con include lo que contenga la palabra 2020, 2021, 2022
-#   dataPS = data.select { |item| item['Fecha'].include?(i.to_s) }
-#   guardar(archivo,'Año ' + i.to_s,dataPS.count.to_s)
-#   print('Año ' + i.to_s + ' - ' + dataPS.count.to_s)
-#   print("\n")
-# end
