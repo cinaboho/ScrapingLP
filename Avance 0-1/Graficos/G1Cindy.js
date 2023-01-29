@@ -1,4 +1,4 @@
-const chartData = '/../cindy_q1.csv'
+const chartData = 'dashboard/cindy/cindy_q1.csv'
 // parse the file from CSV to JSON
 
 d3.csv(chartData).then(function(datapoints) {

@@ -14,9 +14,9 @@ class Metodos
       @juego = juego
       @numero = numero
     end
-  
+    # dashboard/cindy/
     def guardar
-      CSV.open('cindy_q1.csv', 'ab') do |csv|
+      CSV.open('dashboard/cindy/cindy_q1.csv', 'ab') do |csv|
         csv << [juego, numero.to_s]
       end
     end
@@ -33,7 +33,7 @@ class Metodos
     end
   
     def guardar
-      CSV.open('cindy_q2.csv', 'ab') do |csv|
+      CSV.open('dashboard/cindy/cindy_q2.csv', 'ab') do |csv|
         csv << [tema, respuesta, vista, year]
       end
     end
@@ -48,7 +48,38 @@ class Metodos
     end
   
     def guardar
-      CSV.open('cindy_q3.csv', 'ab') do |csv|
+      CSV.open('dashboard/cindy/cindy_q3.csv', 'ab') do |csv|
+        csv << [month, year]
+      end
+    end
+  end
+
+
+  class Pregunta3_Cindy
+    attr_accessor :month, :year
+  
+    def initialize(month,year)
+      @month = month
+      @year = year
+    end
+
+    def guardar
+      CSV.open('dashboard/cindy/cindy_q3.csv', 'ab') do |csv|
+        csv << [month, year]
+      end
+    end
+  end
+  
+  class Pregunta3nueva_Cindy
+    attr_accessor :month, :year
+  
+    def initialize(month,year)
+      @month = month
+      @year = year
+    end
+  
+    def guardar
+      CSV.open('dashboard/cindy/cindy_q3N.csv', 'ab') do |csv|
         csv << [month, year]
       end
     end

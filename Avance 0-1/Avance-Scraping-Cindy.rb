@@ -86,6 +86,7 @@ year.each do |elemento|
 
   puts("\n")
 print('---------PREGUNTA 3---------')
+puts("\n")
 month = document.xpath('//div[@class="name"]/text()[string-length(normalize-space(.)) > 0]').map { 
   |node| node.to_s[/\d{2}.\d{2}.\d{4}/]
 }
@@ -93,11 +94,32 @@ CSV.open('cindy_q3.csv', 'wb') do |csv|
   csv << ["Mes","Año"]
 end
 id=0;
+array=[]
 month.each do |x|
   mes= x[3]+x[4]
   year= x[6]+x[7]+x[8]+x[9]
-  puts year
-  pregunta = Pregunta3_Cindy.new(mes, year)
-  pregunta.guardar
+
+  # puts year
+  # pregunta = Pregunta3_Cindy.new(mes, year)
+  # pregunta.guardar
+   array[id]=[mes,year]
   id = id+1
 end
+
+  # nuevo
+  #  puts array.length
+  c=0
+  for i in(0..(array.length-1))
+      # puts ((array[i])[1])
+      # puts "----"
+      if ((array[i])[1])== '2022'
+        pregunta = Pregunta3nueva_Cindy.new((array[i])[0], (array[i])[1])
+        pregunta.guardar
+        puts i
+      end
+  end
+
+
+
+#  puts array.length
+  # fin nuevo
