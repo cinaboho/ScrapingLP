@@ -73,13 +73,16 @@ year.each do |elemento|
         r=replies[indice]
         v=views[indice]
         y=year[indice]
-        puts "tema: "+t
-        puts "replies: "+r
-        puts "vista: "+v
-        puts "year: "+y
-        puts "--------------"
-        pregunta = Pregunta2_Cindy.new(t, r, v, y)
-        pregunta.guardar
+        if y  == '2022'
+          puts "tema: "+t
+          puts "replies: "+r
+          puts "vista: "+v
+          puts "year: "+y
+          puts "--------------"
+          pregunta = Pregunta2_Cindy.new(t, r, v, y)
+          pregunta.guardar
+        end
+        
     # end
     indice = indice + 1
   end
