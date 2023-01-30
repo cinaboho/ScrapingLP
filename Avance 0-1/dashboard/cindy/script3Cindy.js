@@ -73,26 +73,7 @@ function graficoPIE(ctx,array){
                     color: 'black'	,
                     align:'center',
                 }
-                // datalabels:{
-                //     color: 'black'	,
-                //     align:'center',
-                //     formatter: (value, context) => {	
-                    
-                //         const datapoints= context.chart.data.datasets[0].data;
-                //         function totalsum(total,datapoint){
-                //             return parseInt(total) +parseInt(datapoint);
-                //         }
-                //         const totalvalue=datapoints.reduce(totalsum,0);
-                //         const percentajeValue=Math.round(parseInt(value)/parseInt(totalvalue)*100);
-                //         const display =[`${percentajeValue}%`];
-                        
-                        
-                //         if (value !=0 )
-                //           return display;
-                //         else
-                //             return "";						
-                //     },					
-                // }				  
+           				  
             },				
           },
         plugins:[ChartDataLabels]
