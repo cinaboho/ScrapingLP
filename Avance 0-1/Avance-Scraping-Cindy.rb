@@ -116,7 +116,7 @@ end
       # puts ((array[i])[1])
       # puts "----"
       if ((array[i])[1])== '2022'
-        pregunta = Pregunta3nueva_Cindy.new((array[i])[0], (array[i])[1])
+        pregunta = Pregunta3_Cindy.new((array[i])[0], (array[i])[1])
         pregunta.guardar
         puts i
       end

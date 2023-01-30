@@ -39,6 +39,21 @@ class Metodos
     end
   end
 
+  # class Pregunta3_Cindy
+  #   attr_accessor :month, :year
+  
+  #   def initialize(month,year)
+  #     @month = month
+  #     @year = year
+  #   end
+  
+  #   def guardar
+  #     CSV.open('dashboard/cindy/cindy_q3.csv', 'ab') do |csv|
+  #       csv << [month, year]
+  #     end
+  #   end
+  # end
+  
   class Pregunta3_Cindy
     attr_accessor :month, :year
   
@@ -49,21 +64,6 @@ class Metodos
   
     def guardar
       CSV.open('dashboard/cindy/cindy_q3.csv', 'ab') do |csv|
-        csv << [month, year]
-      end
-    end
-  end
-  
-  class Pregunta3nueva_Cindy
-    attr_accessor :month, :year
-  
-    def initialize(month,year)
-      @month = month
-      @year = year
-    end
-  
-    def guardar
-      CSV.open('dashboard/cindy/cindy_q3N.csv', 'ab') do |csv|
         csv << [month, year]
       end
     end

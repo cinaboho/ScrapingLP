@@ -1,145 +1,32 @@
 $.ajax({
     type: "GET",  
-    url: "cindy/cindy_q3N.csv",
+    url: "cindy/cindy_q2.csv",
     dataType: "text",       
     success: function(response)  
     {
         var dataCSV = $.csv.toArrays(response);
-        pregunta2(dataCSV);
+        pregunta3(dataCSV);
     }   
 });
 
-function pregunta2(dataCSV){
-    const ctx = document.getElementById("grafico3").getContext('2d');
+function pregunta3(dataCSV){
+    const ctx = document.getElementById("grafico2").getContext('2d');
     var estadisticaArray=[];
-    // for (var i = 0; i<dataCSV.length; i++) {
-    //      mes = ((dataCSV[i])[0]);
-    //      year = ((dataCSV[i])[1]);
-    //      estadisticaArray.push([mes,year]);
-    // }
-     var arrayMeses =[];
-     for (var i = 0; i<dataCSV.length; i++) {
-         mes = ((dataCSV[i])[0]);
-         arrayMeses.push(mes);
+
+    for (let i = 0; i < dataCSV.length; i++) {
+        id = "P"+i;
+        tema = (dataCSV[i])[0];
+        NumResp = (dataCSV[i])[1];
+        NumVista = (dataCSV[i])[2];
+        estadisticaArray.push([id,tema, NumResp, NumVista]);
     }
-    var repetidos = {};
+    console.log(estadisticaArray[0]);
+    generateHtmlTableEstadistica3(estadisticaArray,"display2")
+    graficoBarra3(ctx,estadisticaArray);
     
-    arrayMeses.forEach(function(numero){
-        repetidos[numero] = (repetidos[numero] || 0) + 1;
-      });
-    
-      for(const [key, value] of Object.entries(repetidos)){
-        estadisticaArray.push([value,key,2022]);
-      }
-
-
-    generateHtmlTableEstadistica2(estadisticaArray,"display3")		
-    graficoPIE(ctx,estadisticaArray);
 }
 
-function graficoPIE(ctx,array){	
-    var dataEtiquetas=array.map(item => item[0]);
-    var dataValores=array.map(item => item[1]);	
-    total = dataValores.reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue));
-    labelsvalues = dataValores.map(function(value,i){
-        let p= Math.round((value / total) * 100) + '%';
-            return dataEtiquetas[i]+' '+p;
-        });						
-    
-    var pieColors = [
-      'rgb(255, 99, 132)',
-      'rgb(54, 162, 235)',
-      'rgb(255, 205, 86)',
-      'rgb(127, 17, 224)',
-      'rgb(244, 70, 17)',
-    ];
-    const data = {
-        labels: labelsvalues,
-        datasets: [{		
-            data: dataValores,
-            backgroundColor: pieColors,
-            //hoverOffset: 4
-        }]
-    };
-    //https://www.youtube.com/watch?v=hyyIX_8Xe8w
-    //label en el pie con plugins formatter
-
-    window.grafica = new Chart(ctx, {
-        type: 'pie',
-        data: data,	
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'right',					
-                },
-                datalabels:{
-                    color: 'black'	,
-                    align:'center',
-                    formatter: (value, context) => {	
-                        /*if (value !=0 )
-                          return context.chart.data.labels[context.dataIndex];
-                        else
-                            return "";*/
-                        const datapoints= context.chart.data.datasets[0].data;
-                        function totalsum(total,datapoint){
-                            return parseInt(total) +parseInt(datapoint);
-                        }
-                        const totalvalue=datapoints.reduce(totalsum,0);
-                        const percentajeValue=Math.round(parseInt(value)/parseInt(totalvalue)*100);
-                        const display =[`${percentajeValue}%`];
-                        if (value !=0 )
-                          return display;
-                        else
-                            return "";						
-                    },					
-                }				  
-            },				
-          },
-        plugins:[ChartDataLabels]
-      });
-
-};
-
-function graficoLinea(ctx,array){			
-    var dataEtiquetas=array.map(item => item[0]);
-    var dataValores=array.map(item => item[1]);		
-    var barColors = ["red", "green","blue","orange","brown"];	  
-    window.grafica = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: dataEtiquetas,
-            datasets: [{            
-                backgroundColor: barColors,//'rgba(161, 198, 247, 1)',
-                borderColor: 'rgb(47, 128, 237)',
-                data: dataValores,
-            }]
-        },
-        options: {			
-            responsive: true,
-            plugins: {
-                legend: {display: false},
-                datalabels:{
-                    color: 'black'	,
-                    align:'top',					
-                }						
-            }
-        },	
-        plugins:[ChartDataLabels]			
-        /*options: {
-        legend: {display: false},
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true,
-              }
-            }]
-          }
-        },*/
-    });  
-};	
-    
-function generateHtmlTableEstadistica2(data,nombre) {
+function generateHtmlTableEstadistica3(data,nombre) {
     var html = '<table  class="table table-condensed table-hover table-striped">';
 
     if(typeof(data[0]) === 'undefined') {
@@ -147,15 +34,17 @@ function generateHtmlTableEstadistica2(data,nombre) {
     } else {
         html += '<thead>';
                 html += '<tr>';
-                
                     html += '<th>';
-                    html += "CANTIDAD";
+                    html += "ID.TEMA";
                     html += '</th>';
                     html += '<th>';
-                    html += "MES";
+                    html += "TEMA";
                     html += '</th>';
                     html += '<th>';
-                    html += "AÑO";
+                    html += "CANT. RESP.";
+                    html += '</th>';
+                    html += '<th>';
+                    html += "CANT. VISTA";
                     html += '</th>';
                 
                 html += '</tr>';
@@ -177,3 +66,56 @@ function generateHtmlTableEstadistica2(data,nombre) {
         $('#'+nombre).append(html);
     }		
 }
+
+function graficoBarra3(ctx,array){	
+    var dataIdTema=array.map(item => item[0]);
+    var dataResp=array.map(item => item[2]);
+    var dataVistas=array.map(item => item[3]);
+    const datosRespuestas = {
+        label: "Cantidad de Respuestas",
+        data: dataResp, // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
+        backgroundColor: 'rgba(255, 159, 64, 0.5)',// Color de fondo
+        borderColor: 'rgba(255, 159, 64, 1)',// Color del borde
+        borderWidth: 1,// Ancho del borde
+    };
+    const datosVistas = {
+        label: "Cantidad de Vistas",
+        data: dataVistas, // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
+        backgroundColor: 'rgba(54, 162, 235, 0.5)', // Color de fondo
+        borderColor: 'rgba(54, 162, 235, 1)', // Color del borde
+        borderWidth: 1,// Ancho del borde
+    };
+
+    window.grafica = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: dataIdTema,
+            datasets: [
+                datosRespuestas,
+                datosVistas,
+            ]
+        },
+        options: {			
+            responsive: true,
+            indexAxis: 'x',
+            plugins: {
+                legend: {display: false},
+                datalabels:{
+                    color: 'black'	,
+                    align:'center',						
+                }							
+            }
+        },
+        plugins:[ChartDataLabels]			
+        /*options: {
+        legend: {display: false},
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+              }
+            }]
+          }
+        },*/
+    });  
+};
