@@ -5,11 +5,11 @@ $.ajax({
     success: function(response)  
     {
         var dataCSV = $.csv.toArrays(response);
-        pregunta2(dataCSV);
+        pregunta3(dataCSV);
     }   
 });
 
-function pregunta2(dataCSV){
+function pregunta3(dataCSV){
     const ctx = document.getElementById("grafico3").getContext('2d');
     var estadisticaArray=[];
     // for (var i = 0; i<dataCSV.length; i++) {
@@ -52,7 +52,8 @@ function graficoPIE(ctx,array){
     ];
     const data = {
         labels: dataValores,
-        datasets: [{		
+        datasets: [{
+            Label: "Cantidad",
             data: dataCantidad,
             backgroundColor: pieColors,
             //hoverOffset: 4

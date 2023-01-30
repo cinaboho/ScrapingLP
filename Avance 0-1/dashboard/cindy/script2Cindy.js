@@ -5,12 +5,14 @@ $.ajax({
     success: function(response)  
     {
         var dataCSV = $.csv.toArrays(response);
-        pregunta3(dataCSV);
+        pregunta2(dataCSV);
     }   
 });
 
-function pregunta3(dataCSV){
+function pregunta2(dataCSV){
     const ctx = document.getElementById("grafico2").getContext('2d');
+    const ctx2 = document.getElementById("grafico2a").getContext('2d');
+    const ctx3 = document.getElementById("grafico2b").getContext('2d');
     var estadisticaArray=[];
 
     for (let i = 0; i < dataCSV.length; i++) {
@@ -20,10 +22,32 @@ function pregunta3(dataCSV){
         NumVista = (dataCSV[i])[2];
         estadisticaArray.push([id,tema, NumResp, NumVista]);
     }
-    console.log(estadisticaArray[0]);
+    
+    // const data = [["This", "L", 1 ,2], ["just", "z", 3, 6], ["there","s", 2, 30], ["is", "x", 4,  3]]
+    // const sortedData = data.sort((a, b) => b[2] - a[2]);
+    // console.log(sortedData);
+
+    // Numero  de Respuestas
+
     generateHtmlTableEstadistica3(estadisticaArray,"display2")
     graficoBarra3(ctx,estadisticaArray);
-    
+
+     sortedRespuestas = estadisticaArray.sort((a, b) => b[2] - a[2]);
+     Los3Resp = [];
+     for (let i = 0; i < 3; i++) {
+        Los3Resp.push((sortedRespuestas[i]));
+        //console.log(Los3Resp.length);
+     }
+    generateHtmlTableEstadistica3(Los3Resp,"display2a")
+    graficoBarra3(ctx2,Los3Resp);
+    /////
+    sortedVistas = estadisticaArray.sort((a, b) => b[3] - a[3]);
+    Las3Vistas = [];
+    for (let i = 0; i < 3; i++) {
+        Las3Vistas.push((sortedVistas[i]));
+     }
+     generateHtmlTableEstadistica3(Las3Vistas,"display2b")
+     graficoBarra3(ctx3,Las3Vistas);
 }
 
 function generateHtmlTableEstadistica3(data,nombre) {
@@ -59,7 +83,6 @@ function generateHtmlTableEstadistica3(data,nombre) {
                 });
                 html += '</tr>';				
         });
-        //console.log(data);
         html += '</tbody>';
         html += '</table>';	
         document.getElementById(nombre).innerHTML = '';		
@@ -72,14 +95,15 @@ function graficoBarra3(ctx,array){
     var dataResp=array.map(item => item[2]);
     var dataVistas=array.map(item => item[3]);
     const datosRespuestas = {
-        label: "Cantidad de Respuestas",
+        label: "Cantidad de Respuestas - 2022",
         data: dataResp, // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
         backgroundColor: 'rgba(255, 159, 64, 0.5)',// Color de fondo
         borderColor: 'rgba(255, 159, 64, 1)',// Color del borde
         borderWidth: 1,// Ancho del borde
+    
     };
     const datosVistas = {
-        label: "Cantidad de Vistas",
+        label: "Cantidad de Vistas - 2022s",
         data: dataVistas, // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
         backgroundColor: 'rgba(54, 162, 235, 0.5)', // Color de fondo
         borderColor: 'rgba(54, 162, 235, 1)', // Color del borde
@@ -91,6 +115,7 @@ function graficoBarra3(ctx,array){
         data: {
             labels: dataIdTema,
             datasets: [
+                
                 datosRespuestas,
                 datosVistas,
             ]
@@ -104,7 +129,8 @@ function graficoBarra3(ctx,array){
                     color: 'black'	,
                     align:'center',						
                 }							
-            }
+            },
+            
         },
         plugins:[ChartDataLabels]			
         /*options: {

@@ -106,7 +106,8 @@
 			type: 'bar',
 			data: {
 				labels: dataEtiquetas,
-				datasets: [{            
+				datasets: [{  
+					label: "Num. Preguntas",          
 					backgroundColor: barColors,//'rgba(161, 198, 247, 1)',
 					borderColor: 'rgb(47, 128, 237)',
 					data: dataValores,
@@ -222,43 +223,7 @@
 	
 	// };
 	
-	function graficoLinea(ctx,array){			
-		var dataEtiquetas=array.map(item => item[0]);
-		var dataValores=array.map(item => item[1]);		
-		var barColors = ["red", "green","blue","orange","brown"];	  
-		window.grafica = new Chart(ctx, {
-			type: 'line',
-			data: {
-				labels: dataEtiquetas,
-				datasets: [{            
-					backgroundColor: barColors,//'rgba(161, 198, 247, 1)',
-					borderColor: 'rgb(47, 128, 237)',
-					data: dataValores,
-				}]
-			},
-			options: {			
-				responsive: true,
-				plugins: {
-					legend: {display: false},
-					datalabels:{
-						color: 'black'	,
-						align:'top',					
-					}						
-				}
-			},	
-			plugins:[ChartDataLabels]			
-			/*options: {
-			legend: {display: false},
-			  scales: {
-				yAxes: [{
-				  ticks: {
-					beginAtZero: true,
-				  }
-				}]
-			  }
-			},*/
-		});  
-	};	
+
 		
 	function generateHtmlTableEstadistica(data,nombre) {
 		var html = '<table  class="table table-condensed table-hover table-striped">';
@@ -273,7 +238,7 @@
 						html += "NOMBRE";
 						html += '</th>';
 						html += '<th>';
-						html += "VALOR";
+						html += "NUM. PREGUNTAS";
 						html += '</th>';
 					
 					html += '</tr>';
