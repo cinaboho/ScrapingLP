@@ -16,7 +16,7 @@ class Metodos
     end
     # dashboard/cindy/
     def guardar
-      CSV.open('dashboard/cindy/cindy_q1.csv', 'ab') do |csv|
+      CSV.open('dashboard/cindy/cindy_q1.csv', 'a') do |csv|
         csv << [juego, numero.to_s]
       end
     end

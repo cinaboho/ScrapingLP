@@ -12,7 +12,7 @@ $.ajax({
 function pregunta2(dataCSV){
     const ctx = document.getElementById("grafico2").getContext('2d');
     const ctx2 = document.getElementById("grafico2a").getContext('2d');
-    const ctx3 = document.getElementById("grafico2b").getContext('2d');
+    //const ctx3 = document.getElementById("grafico2b").getContext('2d');
     var estadisticaArray=[];
 
     for (let i = 0; i < dataCSV.length; i++) {
@@ -22,15 +22,9 @@ function pregunta2(dataCSV){
         NumVista = (dataCSV[i])[2];
         estadisticaArray.push([id,tema, NumResp, NumVista]);
     }
-    
-    // const data = [["This", "L", 1 ,2], ["just", "z", 3, 6], ["there","s", 2, 30], ["is", "x", 4,  3]]
-    // const sortedData = data.sort((a, b) => b[2] - a[2]);
-    // console.log(sortedData);
 
-    // Numero  de Respuestas
-
-    generateHtmlTableEstadistica3(estadisticaArray,"display2")
-    graficoBarra3(ctx,estadisticaArray);
+    //generateHtmlTableEstadistica3(estadisticaArray,"display2")
+    //graficoBarra3(ctx,estadisticaArray);
 
      sortedRespuestas = estadisticaArray.sort((a, b) => b[2] - a[2]);
      Los3Resp = [];
@@ -38,16 +32,16 @@ function pregunta2(dataCSV){
         Los3Resp.push((sortedRespuestas[i]));
         //console.log(Los3Resp.length);
      }
-    generateHtmlTableEstadistica3(Los3Resp,"display2a")
-    graficoBarra3(ctx2,Los3Resp);
+    generateHtmlTableEstadistica3(Los3Resp,"display2")
+    graficoBarra3(ctx,Los3Resp);
     /////
     sortedVistas = estadisticaArray.sort((a, b) => b[3] - a[3]);
     Las3Vistas = [];
     for (let i = 0; i < 3; i++) {
         Las3Vistas.push((sortedVistas[i]));
      }
-     generateHtmlTableEstadistica3(Las3Vistas,"display2b")
-     graficoBarra3(ctx3,Las3Vistas);
+     generateHtmlTableEstadistica3(Las3Vistas,"display2a")
+     graficoBarra3(ctx2,Las3Vistas);
 }
 
 function generateHtmlTableEstadistica3(data,nombre) {

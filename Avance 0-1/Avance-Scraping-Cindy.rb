@@ -21,8 +21,8 @@ end
 # Pregunta 1
 print('---------PREGUNTA 1---------')
 puts("\n")
-CSV.open('cindy_q1.csv', 'wb') do |csv|
-  csv << ["Juego","Preguntas"]
+if File.exist?('dashboard/cindy/cindy_q1.csv')
+  File.delete('dashboard/cindy/cindy_q1.csv')
 end
 result.each do |elemento|
   play = elemento[0]
@@ -64,8 +64,8 @@ print('---------PREGUNTA 2---------')
 
 busqueda = "2022"
 indice = 0;
-CSV.open('cindy_q2.csv', 'wb') do |csv|
-  csv << ["Tema","Num_Respuestas","Num_Vistas","Año"]
+if File.exist?('dashboard/cindy/cindy_q2.csv')
+  File.delete('dashboard/cindy/cindy_q2.csv')
 end
 year.each do |elemento|
     # if elemento == busqueda
@@ -90,6 +90,9 @@ year.each do |elemento|
   puts("\n")
 print('---------PREGUNTA 3---------')
 puts("\n")
+if File.exist?('dashboard/cindy/cindy_q3.csv')
+  File.delete('dashboard/cindy/cindy_q3.csv')
+end
 month = document.xpath('//div[@class="name"]/text()[string-length(normalize-space(.)) > 0]').map { 
   |node| node.to_s[/\d{2}.\d{2}.\d{4}/]
 }
