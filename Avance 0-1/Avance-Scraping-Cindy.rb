@@ -108,9 +108,6 @@ month = document.xpath('//div[@class="name"]/text()[string-length(normalize-spac
 # cortando la cadena en función de una expresión regular 
 # para 02.02.0004 dígitos contiguos.
 
-CSV.open('cindy_q3.csv', 'wb') do |csv|
-  csv << ["Mes","Año"]
-end
 id=0;
 array=[]
 month.each do |x|
