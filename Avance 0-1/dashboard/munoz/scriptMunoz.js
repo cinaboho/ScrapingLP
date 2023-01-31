@@ -45,12 +45,12 @@ function successFunction(data) {
 function questions(numeroarchivo, chart) {
   var validateQuestion = new Set();
   var labels_cantidad = new Object();
-  var elementosTotales=-1;
+  var elementosTotales = -1;
   const chartData = 'munoz/vivianacsv/' + numeroarchivo + 'viviana_question.csv'
   Papa.parse(chartData, {
     download: true,
     step: function (row) {
-      elementosTotales+=1;
+      elementosTotales += 1;
       clave = row.data[0];
       elementoContar = row.data[1];
       if (numeroarchivo == '2') {
@@ -76,16 +76,16 @@ function questions(numeroarchivo, chart) {
             delete labels_cantidad[clave];
           }
         }
-      }else if (numeroarchivo == 2){
+      } else if (numeroarchivo == 2) {
         for (let clave in labels_cantidad) {
-          if (labels_cantidad[clave] < 5) {
+          if (labels_cantidad[clave] < 15) {
             delete labels_cantidad[clave];
           }
         }
       }
       console.log(labels_cantidad);
 
-      plantilla=`
+      plantilla = `
       <h4>${elementosTotales}</h4>`;
       document.getElementById('datos0').innerHTML = plantilla;
 
@@ -94,10 +94,24 @@ function questions(numeroarchivo, chart) {
         sum += labels_cantidad[key];
       }
 
-      plantillaDinamica=`
+      plantillaDinamica = `
       <h4>${sum}</h4>`;
-      document.getElementById('datos'+numeroarchivo).innerHTML = plantillaDinamica;
+      document.getElementById('datos' + numeroarchivo).innerHTML = plantillaDinamica;
 
+      if(numeroarchivo==2){
+      plantillaPie = ``;
+      let claves = Object.keys(labels_cantidad);
+      for (let i = 0; i < claves.length; i++) {
+        let clave = claves[i];
+        let porcentaje=(((labels_cantidad[clave])/sum)*100).toFixed(2);
+        plantillaPie += `
+  <tr>
+    <td>${clave}</td>
+    <td>${porcentaje}%</td>
+  </tr>`
+      }
+      document.getElementById('porcentajes').innerHTML = plantillaPie;
+    }
       var etiquetas = Object.keys(labels_cantidad);
       var cantidad = Object.values(labels_cantidad);
       console.log(etiquetas);
