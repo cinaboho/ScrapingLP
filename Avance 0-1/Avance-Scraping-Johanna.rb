@@ -56,7 +56,7 @@ def parsear(linkparsear)
   end
 end
 
-CSV.open('johanna_questions.csv', 'wb') do |csv|
+CSV.open('dashboard/lopez/johanna_questions.csv', 'wb') do |csv|
   csv << %w[Titulo Autor Link Fecha Respuestas Visitas]
 end
 
