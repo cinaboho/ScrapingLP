@@ -161,7 +161,67 @@
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">
                             <div class="main-body">
-                                <div class="page-wrapper">
+                                 <div class="page-wrapper">
+
+                                    <div class="page-body">
+                                        <div class="row">
+
+                                            <!-- card1 start -->
+                                            <div class="col-md-6 col-xl-3">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="icofont icofont-dashboard-web bg-c-blue card1-icon"></i>
+                                                        <span class="text-c-blue f-w-600"> Datos scraping</span>
+                                                        <div id="datos0"></div>
+                                                        <div>
+                                                            <span class="f-left m-t-10 text-muted">
+                                                                <i
+                                                                    class="text-c-pink f-16 icofont icofont-calendar m-r-10"></i>Última actualización: 30/01/2023
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- card1 end -->
+                                            <!-- card1 start -->
+                                            <div class="col-md-6 col-xl-3">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="icofont icofont-chart-line bg-c-pink card1-icon"></i>
+                                                        <span class="text-c-pink f-w-600"> Datos pregunta 1</span>
+                                                        <div id="datos1"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- card1 end -->
+                                            <!-- card1 start -->
+                                            <div class="col-md-6 col-xl-3">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i
+                                                            class="icofont icofont-chart-pie bg-c-green card1-icon"></i>
+                                                        <span class="text-c-green f-w-600"> Datos pregunta 2</span>
+                                                        <div id="datos2"></div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- card1 end -->
+                                            <!-- card1 start -->
+                                            <div class="col-md-6 col-xl-3">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i
+                                                            class="icofont icofont-chart-bar-graph bg-c-yellow card1-icon"></i>
+                                                        <span class="text-c-yellow f-w-600">Datos pregunta 3</span>
+                                                        <div id="datos3"></div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <!-- Page-header start -->
                                     <div class="page-header card">
                                         <div class="row align-items-end">
@@ -169,8 +229,8 @@
                                                 <div class="page-header-title">
                                                     <i class="icofont icofont-chart-bar-graph bg-c-blue"></i>
                                                     <div class="d-inline">
-                                                        <h4>Gráfico Pastel - (Año, Cantidad) </h4>
-                                                        <span>Pregunta 1: Entre los años 2020 y lo que va del 2023,
+                                                        <h4>Gráfico de Línea - (Año, Cantidad) </h4>
+                                                        <span>Pregunta 1: Entre los años 2018 y lo que va del 2023,
                                                             ¿Cuál fue el año donde se mencionó más acerca del juego
                                                             Fortnite/Fornite?.</span>
                                                     </div>
@@ -212,26 +272,42 @@
 
                                     <div class="page-header card">
                                         <div class="row align-items-end">
-                                                <div class="page-header-title">
-                                                    <i class="icofont icofont-chart-bar-graph bg-c-blue"></i>
-                                                    <div class="d-inline">
-                                                        <h4>Viviana Chart</h4>
-                                                        <span>Pregunta 2: .</span>
-                                                    </div>
-                                                </div>                                           
+                                            <div class="page-header-title">
+                                                <i class="icofont icofont-chart-bar-graph bg-c-blue"></i>
+                                                <div class="d-inline">
+                                                    <h4>Gráfico Pastel - (Juego, Cantidad)</h4>
+                                                    <span>Pregunta 2: ¿Cuáles son los juegos más recientes (‘recently
+                                                        played’) que más se repiten entre los usuarios que comentan el
+                                                        foro?.</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div class="page-header card">
-                                        <div class="row align-items-end">
-                                                <div class="page-header-title">
-                                                    <i class="icofont icofont-chart-bar-graph bg-c-blue"></i>
-                                                    <div class="d-inline">
-                                                        <h4>Gráfico de Barras - (Edad, Cantidad)</h4>
-                                                        <span>Pregunta 3: Entre los datos recolectados del 2020 hasta lo que va del 2023, ¿Cuáles son las edades que mas se frecuentan entre las personas que comentan en el foro?.</span>
+                                    <div class="page-body">
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-15">
+                                                <div class="card">
+                                                    <div class="chartCard">
+                                                        <div class="chartBox">
+                                                            <canvas id="myChart" class="grafico2"></canvas>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                           
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="page-header card">
+                                        <div class="row align-items-end">
+                                            <div class="page-header-title">
+                                                <i class="icofont icofont-chart-bar-graph bg-c-blue"></i>
+                                                <div class="d-inline">
+                                                    <h4>Gráfico de Barras - (Edad, Cantidad)</h4>
+                                                    <span>Pregunta 3:  Entre los datos recolectados del 2018 hasta lo que
+                                                        va del 2023, ¿Cuáles son las edades que más se frecuentan entre
+                                                        las personas que comentan en el foro?.</span>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="page-body">
@@ -242,6 +318,22 @@
                                                         <div class="chartBox">
                                                             <canvas id="myChart" class="grafico3"></canvas>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Data</h5>
+
+                                                </div>
+                                                <div class="card-block">
+                                                    <!-- <div id="morris-bar-chart"></div>-->
+                                                    <div class="py-1 mx-2" id="csv-data" style="overflow: scroll;">
+
                                                     </div>
                                                 </div>
                                             </div>

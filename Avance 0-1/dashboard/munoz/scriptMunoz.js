@@ -1,6 +1,6 @@
-questionOneAndThree('1','pie');
-questionOneAndThree('3','bar');
-
+questions('1', 'line');
+questions('2', 'pie');
+questions('3', 'bar');
 
 $.ajax({
   url: 'munoz/vivianacsv/viviana_questions.csv',
@@ -9,7 +9,7 @@ $.ajax({
 
 function successFunction(data) {
   var allRows = data.split(/\r?\n|\r/);
-  var table = '<table class="table">';
+  var table = '<table class="table table-condensed table-hover table-striped" >';
   for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
     if (singleRow === 0) {
       table += '<thead>';
@@ -39,35 +39,65 @@ function successFunction(data) {
   }
   table += '</tbody>';
   table += '</table>';
-  $('.table-responsive').append(table);
+  $('#csv-data').append(table);
 }
 
-function questionOneAndThree(numeroarchivo, chart) {
-  validateQuestion = new Set();
+function questions(numeroarchivo, chart) {
+  var validateQuestion = new Set();
   var labels_cantidad = new Object();
-  const chartData = 'munoz/vivianacsv/'+numeroarchivo+'viviana_question.csv'
+  var elementosTotales=-1;
+  const chartData = 'munoz/vivianacsv/' + numeroarchivo + 'viviana_question.csv'
   Papa.parse(chartData, {
     download: true,
     step: function (row) {
-      if (!validateQuestion.has(row.data[0]) && row.data[1] != "") {
-        validateQuestion.add(row.data[0])
-        if (!row.data[1] == undefined || isNaN(labels_cantidad[row.data[1]])) {
-          labels_cantidad[row.data[1]] = 1;
+      elementosTotales+=1;
+      clave = row.data[0];
+      elementoContar = row.data[1];
+      if (numeroarchivo == '2') {
+        var juegos = question2(elementoContar);
+        for (let juego in juegos) {
+          validate(validateQuestion, labels_cantidad, clave, (juegos[juego]).split(" ")[0]);
         }
-        else {
-          valor = labels_cantidad[row.data[1]];
-          valor += 1;
-          labels_cantidad[row.data[1]] = valor;
-        }
+      }
+      else {
+        validate(validateQuestion, labels_cantidad, clave, elementoContar);
       }
     },
     complete: function () {
-      for (let clave in labels_cantidad) {
-        if (labels_cantidad[clave] < 10) {
-          delete labels_cantidad[clave];
+      if (numeroarchivo == 3) {
+        for (let clave in labels_cantidad) {
+          if (labels_cantidad[clave] < 10) {
+            delete labels_cantidad[clave];
+          }
+        }
+      } else if (numeroarchivo == 1) {
+        for (let clave in labels_cantidad) {
+          if (labels_cantidad[clave] <= 1) {
+            delete labels_cantidad[clave];
+          }
+        }
+      }else if (numeroarchivo == 2){
+        for (let clave in labels_cantidad) {
+          if (labels_cantidad[clave] < 5) {
+            delete labels_cantidad[clave];
+          }
         }
       }
       console.log(labels_cantidad);
+
+      plantilla=`
+      <h4>${elementosTotales}</h4>`;
+      document.getElementById('datos0').innerHTML = plantilla;
+
+      let sum = 0;
+      for (let key in labels_cantidad) {
+        sum += labels_cantidad[key];
+      }
+
+      plantillaDinamica=`
+      <h4>${sum}</h4>`;
+      document.getElementById('datos'+numeroarchivo).innerHTML = plantillaDinamica;
+
       var etiquetas = Object.keys(labels_cantidad);
       var cantidad = Object.values(labels_cantidad);
       console.log(etiquetas);
@@ -109,7 +139,7 @@ function questionOneAndThree(numeroarchivo, chart) {
         }
       };
       const myChart = new Chart(
-        document.getElementsByClassName('grafico'+numeroarchivo),
+        document.getElementsByClassName('grafico' + numeroarchivo),
         config
       );
       console.log("All done!");
@@ -118,3 +148,27 @@ function questionOneAndThree(numeroarchivo, chart) {
 }
 
 
+var question2 = function (arregloJuegos) {
+  if (arregloJuegos != undefined) {
+    if ((arregloJuegos.length) > 1) {
+      const arreglo = arregloJuegos.split("|");
+      arreglo.pop();
+      return arreglo;
+    }
+  }
+}
+
+function validate(validateQuestion, labels_cantidad, clave, elementoContar) {
+  if (!validateQuestion.has(clave) && elementoContar != "") {
+    validateQuestion.add(clave);
+    if (!elementoContar == undefined || isNaN(labels_cantidad[elementoContar])) {
+      labels_cantidad[elementoContar] = 1;
+    }
+    else {
+      valor = labels_cantidad[elementoContar];
+      valor += 1;
+      labels_cantidad[elementoContar] = valor;
+
+    }
+  }
+}

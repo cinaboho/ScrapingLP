@@ -14,3 +14,7 @@
     border-radius: 10px;
     background: white;
 }
+
+table td {
+    white-space: normal !important;
+}
