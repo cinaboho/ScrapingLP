@@ -37,15 +37,15 @@ end
 #p result
 puts("\n")
 print('---------PREGUNTA 2---------')
+puts("\n")
 
+# el XPath que encuentra todos los divs con la clase "nombre" 
+# y luego extrae los nodos de texto de longitud distinta de cero 
+# (recortados de espacios en blanco).
   replies = document.xpath('//div[@class="replies"]/text()[string-length(normalize-space(.)) > 0]')
                 .map { |node| node.to_s[/\d+/] }
-  #p replies
-  puts("\n")
   views = document.xpath('//div[@class="views"]/text()[string-length(normalize-space(.)) > 0]')
                 .map { |node| node.to_s[/\w+/] }
-  #p views
-
   links2 = document.css('.topics ul li div')
   topic = links2.map do |lk|
     name = lk.css('.name  p a').inner_text
@@ -54,11 +54,16 @@ print('---------PREGUNTA 2---------')
       end
   end
   tema=topic.compact
-  #p tema
 
-  puts("\n")
+# el XPath que encuentra todos los divs con la clase "nombre" 
+# y luego extrae los nodos de texto de longitud distinta de cero 
+# (recortados de espacios en blanco).
   year = document.xpath('//div[@class="name"]/text()[string-length(normalize-space(.)) > 0]')
               .map { |node| node.to_s[/\d{4}/] }
+
+# .map {|node| node.to_s[/\d{4}/]}- mapéelos en una matriz 
+# cortando la cadena en función de una expresión regular 
+# para 4 dígitos contiguos.
 
   #p year
 
@@ -93,9 +98,16 @@ puts("\n")
 if File.exist?('dashboard/cindy/cindy_q3.csv')
   File.delete('dashboard/cindy/cindy_q3.csv')
 end
+# el XPath que encuentra todos los divs con la clase "nombre" 
+# y luego extrae los nodos de texto de longitud distinta de cero 
+# (recortados de espacios en blanco).
 month = document.xpath('//div[@class="name"]/text()[string-length(normalize-space(.)) > 0]').map { 
   |node| node.to_s[/\d{2}.\d{2}.\d{4}/]
 }
+# .map {|node| node.to_s[/\d{4}/]}- mapéelos en una matriz 
+# cortando la cadena en función de una expresión regular 
+# para 02.02.0004 dígitos contiguos.
+
 CSV.open('cindy_q3.csv', 'wb') do |csv|
   csv << ["Mes","Año"]
 end
