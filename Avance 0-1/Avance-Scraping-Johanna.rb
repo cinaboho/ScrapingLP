@@ -61,5 +61,7 @@ CSV.open('dashboard/lopez/johanna_questions.csv', 'wb') do |csv|
 end
 
 (1..20).each do |i|
+  puts 'Scraper pagina '+ i.to_s
   parsear(link + i.to_s)
 end
+puts 'Scraper Finalizado'
