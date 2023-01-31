@@ -28,7 +28,7 @@ result.each do |elemento|
   play = elemento[0]
   number = elemento[1]
 
-  puts "Juego: "+play
+  puts "Juego:  "+play
   puts "Preguntas: "+number.to_s
   puts "--------------"
   pregunta = Pregunta1_Cindy.new(play, number)
@@ -45,7 +45,7 @@ print('---------PREGUNTA 2---------')
   views = document.xpath('//div[@class="views"]/text()[string-length(normalize-space(.)) > 0]')
                 .map { |node| node.to_s[/\w+/] }
   #p views
-  puts("\n")
+
   links2 = document.css('.topics ul li div')
   topic = links2.map do |lk|
     name = lk.css('.name  p a').inner_text
@@ -119,9 +119,12 @@ end
       # puts ((array[i])[1])
       # puts "----"
       if ((array[i])[1])== '2022'
+        
         pregunta = Pregunta3_Cindy.new((array[i])[0], (array[i])[1])
         pregunta.guardar
-        puts i
+        puts "Año: " + (array[i])[0];
+        puts "Mes: " + (array[i])[1];
+        puts "--------------";
       end
   end
 
