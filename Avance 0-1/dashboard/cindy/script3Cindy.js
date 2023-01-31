@@ -59,8 +59,6 @@ function graficoPIE(ctx,array){
             //hoverOffset: 4
         }]
     };
-    //https://www.youtube.com/watch?v=hyyIX_8Xe8w
-    //label en el pie con plugins formatter
     window.grafica = new Chart(ctx, {
         type: 'pie',
         data: data,	

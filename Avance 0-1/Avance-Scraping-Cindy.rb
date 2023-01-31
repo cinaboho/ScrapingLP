@@ -39,7 +39,7 @@ puts("\n")
 print('---------PREGUNTA 2---------')
 puts("\n")
 
-# el XPath que encuentra todos los divs con la clase "nombre" 
+# el XPath que encuentra todos los divs con la clase "REPLIES" 
 # y luego extrae los nodos de texto de longitud distinta de cero 
 # (recortados de espacios en blanco).
   replies = document.xpath('//div[@class="replies"]/text()[string-length(normalize-space(.)) > 0]')
@@ -55,7 +55,7 @@ puts("\n")
   end
   tema=topic.compact
 
-# el XPath que encuentra todos los divs con la clase "nombre" 
+# el XPath que encuentra todos los divs con la clase "NAME" 
 # y luego extrae los nodos de texto de longitud distinta de cero 
 # (recortados de espacios en blanco).
   year = document.xpath('//div[@class="name"]/text()[string-length(normalize-space(.)) > 0]')
@@ -104,7 +104,7 @@ end
 month = document.xpath('//div[@class="name"]/text()[string-length(normalize-space(.)) > 0]').map { 
   |node| node.to_s[/\d{2}.\d{2}.\d{4}/]
 }
-# .map {|node| node.to_s[/\d{4}/]}- mapéelos en una matriz 
+# .map {|node| node.to_s[/\d{2}.\d{2}.\d{4}/]}- mapéelos en una matriz 
 # cortando la cadena en función de una expresión regular 
 # para 02.02.0004 dígitos contiguos.
 
@@ -137,7 +137,3 @@ end
       end
   end
 
-
-
-#  puts array.length
-  # fin nuevo
